@@ -65,7 +65,11 @@ for (year, rnd), race_laps in df.groupby(["year", "round"]):
             "fuel_s_per_lap": model.params["lap_number"],
             "n_laps": int(model.nobs),
             "r2": model.rsquared,
+            "ref_compound": ok[0],
+            "pace_offset_s": model.params.get(f"C(compound)[T.{compound}]", 0.0),
         })
+
+print(model.params[[p for p in model.params.index if "compound" in p or "tl_" in p]])
 
 #save results to SQL db so we dont have to run the model everytime to look at rsults
 out = pd.DataFrame(results)
