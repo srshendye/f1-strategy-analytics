@@ -1,0 +1,1 @@
+UPDATE races SET location = 'Miami' WHERE location = 'Miami Gardens';
